@@ -1,0 +1,22 @@
+# pipeline-generator.yml
+input:
+  label: ""
+  generate:
+    mapping: 'root = "hello world"'
+    interval: 1s
+    count: 0
+    batch_size: 1
+    auto_replay_nacks: true
+
+output:
+  kafka_franz:
+    brokers:
+      - "redpanda-0:9092"
+    topic: "generated-data"
+
+logger:
+  level: INFO
+  format: json
+
+metrics:
+  prometheus: {}

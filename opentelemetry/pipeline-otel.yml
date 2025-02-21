@@ -1,0 +1,18 @@
+# pipeline-otel.yml
+input:
+  kafka_franz:
+    brokers:
+      - "redpanda-0:9092"
+    topics:
+      - "traces"
+    consumer_group: "otel-connector-group"
+    commit_period: 1s
+    start_from_oldest: true
+
+output:
+  http:
+    url: "http://otel-collector:55681/v1/traces"
+    method: POST
+    headers:
+      Content-Type: "application/json"
+    timeout: 5s
